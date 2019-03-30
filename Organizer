@@ -1,0 +1,72 @@
+import java.util.ArrayList;
+import java.sql.Time;
+import java.sql.Date;
+
+public class Organizer {
+
+    /*calender part, tasks part
+    calender - time and event
+    tasks - to do
+
+
+     */
+
+    private ArrayList<Event> calender = new ArrayList<Event>();
+
+    public void addEvent(Event e)
+    {
+        calender.add(e);
+    }
+
+    public void removeEvent(Event e)
+    {
+        calender.remove(e);
+    }
+
+    public Event getEventAtTime(Time t)
+    {
+        Event rv = null;
+
+        for (Event e : calender)
+        {
+            if (e.getTime().equals(t))
+                rv = e;
+        }
+
+        return rv;
+    }
+
+    public ArrayList<Event> getEventsOnDayDate(Date d)
+    {
+        ArrayList<Event> rv = new ArrayList<Event>();
+
+        for (Event e : calender)
+        {
+            if (e.getDate().equals(d))
+                rv.add(e);
+        }
+
+        return rv;
+    }
+
+    public void print()
+    {
+        for (Event e : calender)
+            System.out.println(e.toString());
+    }
+
+    public boolean isTimeOpen(Date d, Time t)
+    {
+        boolean rv = true;
+
+        for (Event e : calender)
+        {
+            if (e.getDate().equals(d))
+                if (e.getTime().equals(t))
+                    rv = false;
+        }
+
+        return rv;
+    }
+
+}
