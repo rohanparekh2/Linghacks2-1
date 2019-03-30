@@ -1,0 +1,350 @@
+public class DateClass {
+	// Instance Variables
+	private int month;
+	private int day;
+	private int year;
+	
+	// Constructors
+		public DateClass() { 
+			setYear(0);
+			setMonth(1);
+			setDay(1);
+		}
+		
+		public DateClass(int m, int d, int y) { 
+			setYear(y);
+			setMonth(m);
+			setDay(d);
+		}
+		
+		public DateClass(int mmddyyyy) { 
+			if(mmddyyyy < 10000000 && mmddyyyy >= 1000000) {
+				setYear(mmddyyyy%10000);
+				setMonth(mmddyyyy/1000000);
+				setDay(mmddyyyy/10000%100);
+			}
+			else if(mmddyyyy < 100000000) {	//11245643
+				setYear(mmddyyyy%10000);
+				setMonth(mmddyyyy/1000000);
+				setDay(mmddyyyy/10000%100);
+			}
+			else 
+				System.out.println("Error: Invalid DateClass");
+			}
+	//Getters/Setters
+	public int getMonth() {
+		return month;
+	}
+	public void setMonth(int newMonth) {
+		if(newMonth <1 || newMonth >12) {
+			System.out.println("Error: Invalid DateClass" + " " + month +"/"+ day+ "/"+ year);
+			month =0;
+			
+		}
+		else
+			month= newMonth;
+	}
+	public int getDay() {
+		return day;
+	}
+	public void setDay(int newDay) {
+		if(newDay <1 || newDay >31) {
+			System.out.println("Error: Invalid DateClass" + " " + month +"/"+ newDay + "/"+ year);
+			month =0;
+			day =0;
+			year =0;
+		}
+		else if(newDay== 31 && (month==2 || month==4 || month ==6 || month == 9 || month == 11)) {
+			System.out.println("Error: Invalid DateClass" + " " + month + "/"	+ newDay + "/" + year);
+			month =0;
+			day =0;
+			year =0;
+		}
+		else if(newDay ==30 && month ==2){
+			System.out.println("Error: Invalid DateClass" + " " + month + "/"	+ newDay + "/" + year);
+			month =0;
+			day =0;
+			year =0;
+		}
+		else if(newDay ==29 && month ==2 && (((year %4 !=0) ||(year %4 ==0 && year %100 ==0 && year %400 !=0)))) {
+			System.out.println("Error: Invalid DateClass" + " " + month + "/"	+ newDay + "/" + year);
+			month =0;
+			day =0;
+			year =0;		
+		}
+		else
+			day= newDay;
+	}
+	public int getYear() {
+		return year;
+	}
+	public void setYear(int newYear) {
+		// negative year is BC
+		year = newYear;
+	}
+	
+	public String monthName() {
+		String [] m = {"", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+		return m[month];
+	}
+	
+	public String toStr() {
+		return monthName()+ " " + getDay()+ ", "+ getYear();
+	}
+	
+	public boolean isLastDayOfMonth() {
+		if(day == 31 && (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)) {
+			return true;
+		}
+		else if(day == 30 && (month == 4 || month == 6 || month == 9 || month == 11)) {
+			return true;
+		}
+		else if(month == 2 && day == 29 && (year%4 == 0 && year%100 != 0)) {
+			return true;
+		}
+		else if(month == 2 && day == 29 && (year%4 == 0 && year%100 == 0 && year%400 != 0)){
+			return true;
+		}
+		else if(month == 2 && day == 28){
+			return true;
+		}
+		else
+			return false;
+	
+	}
+	
+	public boolean isBefore(DateClass d) {
+		if(year < d.getYear())
+			return true;
+		else if(year == d.getYear() && month <d.getMonth())
+			return true;
+		else if(month == d.getMonth() && day < d.getDay())
+			return true;
+		else 
+			return false;
+	}
+	
+	public boolean isAfter(DateClass d) {
+		if(year > d.getYear())
+			return true;
+		else if(year == d.getYear() && month  > d.getMonth())
+			return true;
+		else if(month == d.getMonth() && day > d.getDay())
+			return true;
+		else 
+			return false;
+	}
+	
+	public boolean isSameDate(DateClass d) {
+		if(year == d.getYear() && month == d.getMonth() && day == d.getDay())
+			return true;
+		else 
+			return false;
+	}
+	
+	public boolean isLeapYear() {
+		if(((year %4 ==0 && year %100 !=0) || (year %4 ==0 && year %100 ==0 && year% 400==0)))
+			return true;
+		else 
+			return false;
+	}
+	
+	public String nextDate() {
+		if(day == 31 && (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 ) || 
+		(day == 30 && (month == 4 || month == 6 || month == 9 || month == 11)) || (month ==2 && day == 29 && isLeapYear()== true) 
+		|| (month==2 && day==28 && isLeapYear() == false)) {
+			month+=1;
+			day =1;
+		}
+		else if (day == 31 && month ==12) {
+			year +=1;
+			month =1;
+			day =1;
+		}
+		else
+			day +=1;
+		return toStr();
+	}
+	
+	public String prevDate() {
+		if(day == 1 && (month == 5 || month == 7|| month == 8 || month == 10 || month == 12)){
+			month-=1;
+			day =30;
+		}
+		else if(day == 1 && (month == 2 || month == 4|| month == 6 || month == 9 || month == 11)) {
+			month -=1;
+			day =31;
+		}
+		else if(day == 1 && month ==3 && isLeapYear() == true) {
+			month -=1;
+			day =29;
+		}
+		else if(day == 1 && month ==3 && isLeapYear() == false) {
+			month -=1;
+			day =28;
+		} 
+		else if (day == 1 && month == 1) {
+			year -=1;
+			month =12;
+			day =31;
+		}
+		else
+			day -=1;
+		return toStr();
+	}
+	
+	public int daysApart(DateClass d) {
+		int count =0;
+		while(isBefore(d)) {
+			count+=1;
+			nextDate();
+		}
+		while(isAfter(d)) {
+			count+=1;
+			prevDate();
+		}
+		return count;
+	}	
+	public int dayOfYear() {
+		int count=0;
+		int number[] = {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};  
+		int number2[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+		if(isLeapYear()==true) {
+			for(int i=1; i< month; i++) {
+					count += number[i];
+				}
+			count += day;
+			}
+		else if(isLeapYear()==false) {
+			for(int j=1; j< month; j++) {
+					count += number2[j];
+			}
+			count += day;
+		}
+		return count;
+	}
+	public int daysLeftInMonth() {
+		int count =0;
+		if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
+			count = 31- day;
+		if(month == 4 || month == 6 || month == 9 || month == 11)
+			count = 30- day;
+		if(month == 2 && isLeapYear() ==true)
+			count = 29-day;
+		if(month == 2 && isLeapYear() ==false)
+			count = 28-day;
+		return count;
+	}
+	
+	public int daysLeftInYear() {
+		int count =0;
+		if(isLeapYear()== true)
+			count =366;
+		if(isLeapYear() == false)
+			count = 365;
+		return count - dayOfYear();
+	}
+	
+	public int daysLeftInDecade() {
+		int count=0;
+		for(int i=0; i<10; i++) {
+			if(isLeapYear()== true) {
+				if(i!=0)
+					count+=366;
+				year ++;
+				if(year %10 ==0)
+					break;
+			}
+			else if(isLeapYear()== false) {
+				if(i!=0)
+					count+=365;
+				year ++;
+				if(year %10 ==0)
+					break;
+			}
+		}
+		return count + daysLeftInYear();
+	}
+	
+	public int daysLeftInCentury() {
+		int count=0;
+		for(int i=0; i<100; i++) {
+			if(isLeapYear()== true) {
+				if(i!=0)
+					count+=366;
+				year ++;
+				if(year %100 ==0)
+					break;
+			}
+			else if(isLeapYear()== false) {
+				if(i!=0)
+					count+=365;
+				year ++;
+				if(year %100 ==0)
+					break;
+			}
+		}
+		return count + daysLeftInYear();
+	}
+	
+	public String earlierDate(DateClass d) {
+		if(year < d.year)
+			return toStr();
+		else if(year == d.year && month < d.month)
+			return toStr();
+		else if(year == d.year && month == d.month && day <d.day)
+			return toStr();
+		else 
+			return d.toStr();
+	}
+	
+	public String laterDate(DateClass d) {
+		if(year > d.year)
+			return toStr();
+		else if(year == d.year && month > d.month)
+			return toStr();
+		else if(year == d.year && month == d.month && day > d.day)
+			return toStr();
+		else 
+			return d.toStr();
+	}
+	
+	public String dayOfWeek() {
+		String rv = "";
+		DateClass week = new DateClass(11, 4, 2018);
+		int rv2= daysApart(week);
+		if(week.year <= year || (week.year==year && week.month <= month) || (week.year==year && week.month== month && week.day <= day)) {
+			if(rv2 % 7==0) 
+				rv = "Sunday";
+			if(rv2 % 7==1) 
+				rv = "Monday";
+			if(rv2 % 7==2) 
+				rv = "Tuesday";
+			if(rv2 % 7==3) 
+				rv = "Wednesday";
+			if(rv2 % 7==4) 
+				rv = "Thursday";
+			if(rv2 % 7==5) 
+				rv = "Friday";
+			if(rv2 % 7==6) 
+				rv = "Saturday";
+		}
+		else if(week.year >= year || (week.year==year && week.month >= month) || (week.year==year && week.month== month && week.day >= day)) {
+			if(rv2 % 7==0) 
+				rv = "Sunday";
+			if(rv2 % 7==1) 
+				rv = "Saturday";
+			if(rv2 % 7==2) 
+				rv = "Friday";
+			if(rv2 % 7==3) 
+				rv = "Thursday";
+			if(rv2 % 7==4) 
+				rv = "Wednesday";
+			if(rv2 % 7==5) 
+				rv = "Tuesday";
+			if(rv2 % 7==6) 
+				rv = "Monday";
+		}
+		return rv;
+	}
+}// end DateClass class
