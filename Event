@@ -1,0 +1,52 @@
+import java.sql.Time;
+import java.sql.Date;
+
+public class Event {
+
+    private String eventName;
+    private Time time;
+    private Date date;
+
+
+    public Event() {}
+
+    public Event(String eventName, Time timeOfEvent, Date date)
+    {
+        this.eventName = eventName;
+        this.time = timeOfEvent;
+        this.date = date;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public Time getTime() {
+        return time;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
+
+    public void setTimeOfEvent(Time timeOfEvent) {
+        this.time = timeOfEvent;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String toString()
+    {
+        return eventName + " " + date.toString() + " " + time.toString();
+    }
+
+
+
+
+}
