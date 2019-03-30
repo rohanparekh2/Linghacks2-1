@@ -1,0 +1,21 @@
+package stockMarket;
+
+public class StockMarket {
+	double company1= 5;
+	double company2 = 6;
+	double company3 = 7;
+	double company4 = 8;
+	double company5 = 9;
+	double company6= 10; 
+  double company7= 11; 
+  double company8= 12; 
+  double company9 = 13;
+  double company10= 14; 
+  double company11= 15;
+  double company12 = 16;
+  double company13 = 17;
+  double company14 = 18;
+  double company15 = 19; 
+	
+
+}
