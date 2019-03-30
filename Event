@@ -1,16 +1,15 @@
 import java.sql.Time;
-import java.sql.Date;
 
 public class Event {
 
     private String eventName;
     private Time time;
-    private Date date;
+    private DateClass date;
 
 
     public Event() {}
 
-    public Event(String eventName, Time timeOfEvent, Date date)
+    public Event(String eventName, Time timeOfEvent, DateClass date)
     {
         this.eventName = eventName;
         this.time = timeOfEvent;
@@ -33,11 +32,11 @@ public class Event {
         this.time = timeOfEvent;
     }
 
-    public Date getDate() {
+    public DateClass getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(DateClass date) {
         this.date = date;
     }
 
@@ -45,8 +44,5 @@ public class Event {
     {
         return eventName + " " + date.toString() + " " + time.toString();
     }
-
-
-
 
 }
