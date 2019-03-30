@@ -1,6 +1,5 @@
-import java.util.ArrayList;
+mport java.util.ArrayList;
 import java.sql.Time;
-import java.sql.Date;
 
 public class Organizer {
 
@@ -36,7 +35,7 @@ public class Organizer {
         return rv;
     }
 
-    public ArrayList<Event> getEventsOnDayDate(Date d)
+    public ArrayList<Event> getEventsOnDayDate(DateClass d)
     {
         ArrayList<Event> rv = new ArrayList<Event>();
 
@@ -55,7 +54,7 @@ public class Organizer {
             System.out.println(e.toString());
     }
 
-    public boolean isTimeOpen(Date d, Time t)
+    public boolean isTimeOpen(DateClass d, Time t)
     {
         boolean rv = true;
 
