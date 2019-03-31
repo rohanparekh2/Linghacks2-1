@@ -22,19 +22,6 @@ public class Organizer {
         calender.remove(e);
     }
 
-    public Event getEventAtTime(Time t)
-    {
-        Event rv = null;
-
-        for (Event e : calender)
-        {
-            if (e.getTime().equals(t))
-                rv = e;
-        }
-
-        return rv;
-    }
-
     public ArrayList<Event> getEventsOnDayDate(DateClass d)
     {
         ArrayList<Event> rv = new ArrayList<Event>();
@@ -52,20 +39,6 @@ public class Organizer {
     {
         for (Event e : calender)
             System.out.println(e.toString());
-    }
-
-    public boolean isTimeOpen(DateClass d, Time t)
-    {
-        boolean rv = true;
-
-        for (Event e : calender)
-        {
-            if (e.getDate().equals(d))
-                if (e.getTime().equals(t))
-                    rv = false;
-        }
-
-        return rv;
     }
 
 }
