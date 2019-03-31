@@ -347,4 +347,11 @@ public class DateClass {
 		}
 		return rv;
 	}
+	
+    public String toString()
+    {
+        return monthName() + " " + day + ", " + year;
+    }
 }// end DateClass class
+
+
