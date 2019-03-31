@@ -3,16 +3,14 @@ import java.sql.Time;
 public class Event {
 
     private String eventName;
-    private Time time;
     private DateClass date;
 
 
     public Event() {}
 
-    public Event(String eventName, Time timeOfEvent, DateClass date)
+    public Event(String eventName, DateClass date)
     {
         this.eventName = eventName;
-        this.time = timeOfEvent;
         this.date = date;
     }
 
@@ -20,17 +18,11 @@ public class Event {
         return eventName;
     }
 
-    public Time getTime() {
-        return time;
-    }
 
     public void setEventName(String eventName) {
         this.eventName = eventName;
     }
 
-    public void setTimeOfEvent(Time timeOfEvent) {
-        this.time = timeOfEvent;
-    }
 
     public DateClass getDate() {
         return date;
@@ -42,7 +34,7 @@ public class Event {
 
     public String toString()
     {
-        return eventName + " " + date.toString() + " " + time.toString();
+        return eventName + " " + date.toString();
     }
 
 }
